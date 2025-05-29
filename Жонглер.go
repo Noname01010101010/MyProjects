@@ -50,7 +50,7 @@ func throwBall(ball Ball) {
 	if ball.id == 0 {
 		idCounter++
 		ball.id = idCounter
-		ball.duration = rand.Intn(6) + 5 // 5–10 секунд
+		ball.duration = rand.Intn(6) + 5 
 	}
 
 	fmt.Printf("[ПОДБРОС] Мяч #%d подброшен на %d секунд\n", ball.id, ball.duration)
@@ -64,7 +64,7 @@ func juggler(N int, T int) {
 	loopTicker := time.NewTicker(time.Second)
 	defer loopTicker.Stop()
 
-	// Запуск N мячей с интервалом в 1 секунду
+	
 	for i := 0; i < N; i++ {
 		mu.Lock()
 		throwBall(Ball{})
@@ -72,7 +72,7 @@ func juggler(N int, T int) {
 		time.Sleep(time.Second)
 	}
 
-	// Горутина для обработки падений мячей
+	
 	go func() {
 		for b := range fallChan {
 			mu.Lock()
@@ -122,5 +122,5 @@ func juggler(N int, T int) {
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
-	juggler(3, 1) // 3 мяча, 1 минута жонглирования
+	juggler(3, 1) 
 }
